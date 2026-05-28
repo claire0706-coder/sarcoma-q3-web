@@ -10,6 +10,8 @@
   --accent: #2dd4bf;
   --accent-2: #f59e0b;
   --shadow: rgba(0, 0, 0, 0.24);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Noto Serif TC", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Segoe UI", sans-serif;
 }
 
 * {
@@ -18,12 +20,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
   margin: 0;
   color: var(--ink);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Segoe UI", sans-serif;
+  font-family: var(--serif);
   line-height: 1.5;
   background:
     radial-gradient(circle at 16% 10%, rgba(45, 212, 191, 0.14), transparent 28rem),
@@ -49,6 +52,17 @@ a {
   background: rgba(7, 16, 24, 0.78);
   border-bottom: 1px solid rgba(94, 234, 212, 0.18);
   backdrop-filter: blur(14px);
+}
+
+.topbar,
+button,
+nav a,
+.eyebrow,
+.kicker,
+.panel-label,
+.path-node span,
+.refline {
+  font-family: var(--sans);
 }
 
 .brand {
@@ -119,6 +133,21 @@ main {
   align-items: center;
 }
 
+.hero,
+.section {
+  opacity: 0;
+  transform: translateY(34px) scale(0.986);
+  transition:
+    opacity 760ms ease,
+    transform 920ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero.in-view,
+.section.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .hero-inner {
   text-align: center;
 }
@@ -145,12 +174,14 @@ h1 {
   margin: 1rem auto 0;
   font-size: clamp(2.6rem, 7vw, 6.4rem);
   line-height: 0.98;
+  letter-spacing: -0.02em;
   text-shadow: 0 0 26px rgba(45, 212, 191, 0.26);
 }
 
 h2 {
   font-size: clamp(2rem, 4vw, 4rem);
   line-height: 1.05;
+  letter-spacing: -0.015em;
   margin-bottom: 0.8rem;
 }
 
@@ -192,6 +223,42 @@ h3 {
     0 0 0 1px rgba(45, 212, 191, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+}
+
+.section.in-view .panel,
+.section.in-view .metric-card,
+.section.in-view .choice,
+.section.in-view .signal {
+  animation: floatIn 650ms both;
+}
+
+.section.in-view .panel:nth-child(2),
+.section.in-view .metric-card:nth-child(2),
+.section.in-view .choice:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.section.in-view .panel:nth-child(3),
+.section.in-view .metric-card:nth-child(3),
+.section.in-view .choice:nth-child(3) {
+  animation-delay: 150ms;
+}
+
+.section.in-view .metric-card:nth-child(4),
+.section.in-view .choice:nth-child(4) {
+  animation-delay: 220ms;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .path-node::before,
@@ -287,6 +354,7 @@ h3 {
   color: var(--accent);
   font-size: clamp(2rem, 4vw, 3.5rem);
   line-height: 1;
+  font-family: var(--serif);
 }
 
 .metric-card span,
@@ -386,6 +454,24 @@ h3 {
 
 body.show-notes .speaker-note {
   display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero,
+  .section,
+  .section.in-view .panel,
+  .section.in-view .metric-card,
+  .section.in-view .choice,
+  .section.in-view .signal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
 }
 
 .apa-list {
