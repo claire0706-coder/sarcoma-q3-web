@@ -362,7 +362,7 @@ h3 {
   max-height: 360px;
   object-fit: contain;
   border-radius: 8px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  box-shadow: none;
 }
 
 .figure-card.wide img {
@@ -371,10 +371,13 @@ h3 {
 
 .evidence-figure {
   margin-top: 1rem;
+  width: min(960px, 100%);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .evidence-figure img {
-  max-height: 300px;
+  max-height: 420px;
 }
 
 .cnb-figure {
