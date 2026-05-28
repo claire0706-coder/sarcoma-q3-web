@@ -401,6 +401,14 @@ h3 {
   max-height: 440px;
 }
 
+.answer-figure {
+  margin-top: 1rem;
+}
+
+.answer-figure img {
+  max-height: 260px;
+}
+
 figcaption {
   padding: 0.8rem 1rem 1rem;
   color: var(--muted);
